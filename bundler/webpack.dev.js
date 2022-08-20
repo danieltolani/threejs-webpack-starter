@@ -3,6 +3,10 @@ const commonConfiguration = require('./webpack.common.js')
 const ip = require('internal-ip')
 const portFinderSync = require('portfinder-sync')
 
+const crypto = require("crypto");
+const crypto_orig_createHash = crypto.createHash;
+crypto.createHash = algorithm => crypto_orig_createHash(algorithm == "md4" ? "sha256" : algorithm);
+
 const infoColor = (_message) =>
 {
     return `\u001b[1m\u001b[34m${_message}\u001b[39m\u001b[22m`
